@@ -5,6 +5,8 @@ import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
+import io.netty.handler.codec.LineBasedFrameDecoder;
+import io.netty.handler.codec.string.StringDecoder;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -30,6 +32,8 @@ public class Acceptor {
                 @Override
                 protected void initChannel(SocketChannel socketChannel) throws Exception {
                     ChannelPipeline p = socketChannel.pipeline();
+                    p.addLast(new LineBasedFrameDecoder(1024));
+                    p.addLast(new StringDecoder());
                     p.addLast(new SocketHandler());
                 }
             });
