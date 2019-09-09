@@ -1,21 +1,27 @@
 package io.github.zhenbianshu.run;
 
+import io.github.zhenbianshu.demo.HelloService;
+import io.github.zhenbianshu.model.Service;
+import io.github.zhenbianshu.model.ServiceMapping;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
-import io.netty.handler.codec.LineBasedFrameDecoder;
 import io.netty.handler.codec.string.StringDecoder;
 import lombok.extern.slf4j.Slf4j;
+
+import java.lang.reflect.Method;
 
 /**
  * @author zbs
  * @date 2019/9/3
  */
 @Slf4j
-public class Acceptor {
+public class Provider {
     public static void main(String[] args) {
+        initService();
+
         EventLoopGroup bossGroup = new NioEventLoopGroup(1);
         EventLoopGroup workerGroup = new NioEventLoopGroup(8);
 
@@ -23,16 +29,14 @@ public class Acceptor {
         bootstrap.group(bossGroup, workerGroup);
         bootstrap.channel(NioServerSocketChannel.class);
         bootstrap.option(ChannelOption.SO_BACKLOG, 16);
-        bootstrap.option(ChannelOption.TCP_NODELAY, true);
-        bootstrap.option(ChannelOption.SO_KEEPALIVE, true);
-
+        bootstrap.childOption(ChannelOption.TCP_NODELAY, true);
+        bootstrap.childOption(ChannelOption.SO_KEEPALIVE, true);
 
         try {
             bootstrap.childHandler(new ChannelInitializer<SocketChannel>() {
                 @Override
                 protected void initChannel(SocketChannel socketChannel) throws Exception {
                     ChannelPipeline p = socketChannel.pipeline();
-                    p.addLast(new LineBasedFrameDecoder(1024));
                     p.addLast(new StringDecoder());
                     p.addLast(new SocketHandler());
                 }
@@ -44,5 +48,24 @@ public class Acceptor {
             bossGroup.shutdownGracefully();
             workerGroup.shutdownGracefully();
         }
+    }
+
+    private static void initService() {
+        HelloService helloService = new HelloService();
+
+        Method method = null;
+        try {
+            method = HelloService.class.getDeclaredMethod("say", String.class);
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        }
+
+        Service service = Service.builder()
+                .classObject(helloService)
+                .id(666)
+                .method(method)
+                .build();
+
+        ServiceMapping.SERVICE_MAP.put(666, service);
     }
 }
