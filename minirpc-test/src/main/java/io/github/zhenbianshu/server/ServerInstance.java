@@ -1,7 +1,7 @@
-package io.github.zhenbianshu.run;
+package io.github.zhenbianshu.server;
 
+import io.github.zhenbianshu.api.HelloService;
 import io.github.zhenbianshu.core.Provider;
-import io.github.zhenbianshu.transport.Server;
 import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.Method;
@@ -13,10 +13,7 @@ import java.lang.reflect.Method;
 @Slf4j
 public class ServerInstance {
     public static void main(String[] args) {
-        initService();
-
-        Server server = new Server();
-        server.init();
+        log.info("start");
     }
 
     private static void initService() {
@@ -31,10 +28,10 @@ public class ServerInstance {
 
         Provider service = Provider.builder()
                 .classObject(helloService)
-                .id(666)
+                .className(HelloService.class.getName())
                 .method(method)
                 .build();
 
-        Provider.PROVIDERS_MAP.put(666, service);
+        Provider.PROVIDERS_MAP.put(HelloService.class.getName(), service);
     }
 }

@@ -14,9 +14,9 @@ import java.util.concurrent.ConcurrentHashMap;
 @Data
 @Builder
 public class Provider {
-    public static Map<Integer, Provider> PROVIDERS_MAP = new ConcurrentHashMap<>();
+    public static Map<String, Provider> PROVIDERS_MAP = new ConcurrentHashMap<>();
 
-    private Integer id;
+    private String className;
     private Object classObject;
     private Method method;
 }

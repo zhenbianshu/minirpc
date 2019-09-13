@@ -6,13 +6,11 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.codec.string.StringDecoder;
-import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author zbs
  * @date 2019/9/3
  */
-@Slf4j
 public class Server {
     public boolean init() {
         EventLoopGroup bossGroup = new NioEventLoopGroup(1);
@@ -37,7 +35,6 @@ public class Server {
             ChannelFuture channelFuture = bootstrap.bind(8122).sync();
             channelFuture.channel().closeFuture().sync();
         } catch (Exception e) {
-            log.error("start server error", e);
             bossGroup.shutdownGracefully();
             workerGroup.shutdownGracefully();
             return false;
