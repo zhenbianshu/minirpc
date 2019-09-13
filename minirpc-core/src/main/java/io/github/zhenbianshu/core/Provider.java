@@ -1,9 +1,11 @@
-package io.github.zhenbianshu.model;
+package io.github.zhenbianshu.core;
 
 import lombok.Builder;
 import lombok.Data;
 
 import java.lang.reflect.Method;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author zbs
@@ -11,7 +13,9 @@ import java.lang.reflect.Method;
  */
 @Data
 @Builder
-public class Service {
+public class Provider {
+    public static Map<Integer, Provider> PROVIDERS_MAP = new ConcurrentHashMap<>();
+
     private Integer id;
     private Object classObject;
     private Method method;

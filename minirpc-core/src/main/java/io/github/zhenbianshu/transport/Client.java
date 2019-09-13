@@ -1,4 +1,4 @@
-package io.github.zhenbianshu.client;
+package io.github.zhenbianshu.transport;
 
 import com.alibaba.fastjson.JSON;
 import io.github.zhenbianshu.core.ResponseFuture;
@@ -17,12 +17,12 @@ import java.util.concurrent.CompletableFuture;
  * @author zbs
  * @date 2019/9/5
  */
-public class Connection {
+public class Client {
     private String ip;
     private Integer port;
     private Channel channel;
 
-    public Connection(String ip, Integer port) {
+    public Client(String ip, Integer port) {
         this.ip = ip;
         this.port = port;
     }
@@ -41,7 +41,7 @@ public class Connection {
                     @Override
                     protected void initChannel(SocketChannel ch) {
                         ch.pipeline().addLast(new StringDecoder());
-                        ch.pipeline().addLast(new SocketHandler());
+                        ch.pipeline().addLast(new ClientSocketHandler());
                     }
                 });
         try {

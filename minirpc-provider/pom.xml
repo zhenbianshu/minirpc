@@ -9,12 +9,12 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>minirpc-server</artifactId>
+    <artifactId>minirpc-provider</artifactId>
 
     <dependencies>
         <dependency>
             <groupId>io.github.zhenbianshu</groupId>
-            <artifactId>minirpc-common</artifactId>
+            <artifactId>minirpc-core</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>

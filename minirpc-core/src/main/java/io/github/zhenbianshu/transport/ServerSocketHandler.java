@@ -1,10 +1,9 @@
-package io.github.zhenbianshu.run;
+package io.github.zhenbianshu.transport;
 
 import com.alibaba.fastjson.JSON;
-import io.github.zhenbianshu.model.Service;
 import io.github.zhenbianshu.core.Request;
 import io.github.zhenbianshu.core.Response;
-import io.github.zhenbianshu.model.ServiceMapping;
+import io.github.zhenbianshu.core.Provider;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
@@ -18,7 +17,7 @@ import java.lang.reflect.Method;
  * @date 2019/9/3
  */
 @Slf4j
-public class SocketHandler extends ChannelInboundHandlerAdapter {
+public class ServerSocketHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) {
         String body = (String) msg;
@@ -26,7 +25,7 @@ public class SocketHandler extends ChannelInboundHandlerAdapter {
         System.out.println(msg);
 
         Request request = JSON.parseObject(body, Request.class);
-        Service service = ServiceMapping.SERVICE_MAP.get(request.getServiceId());
+        Provider service = Provider.PROVIDERS_MAP.get(request.getServiceId());
 
         Method method = service.getMethod();
         Object object = service.getClassObject();

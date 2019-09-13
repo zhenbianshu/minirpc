@@ -1,6 +1,6 @@
 package io.github.zhenbianshu.run;
 
-import io.github.zhenbianshu.client.Connection;
+import io.github.zhenbianshu.transport.Client;
 import io.github.zhenbianshu.core.Request;
 
 import java.util.concurrent.CompletableFuture;
@@ -11,7 +11,7 @@ import java.util.concurrent.CompletableFuture;
  */
 public class Demo {
     public static void main(String[] args) {
-        Connection connection = new Connection("127.0.0.1", 8122);
+        Client connection = new Client("127.0.0.1", 8122);
         connection.connect();
         Request request = Request.builder()
                 .requestId(23544353453L)

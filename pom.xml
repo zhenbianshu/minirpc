@@ -11,8 +11,8 @@
     <modules>
         <module>minirpc-registry</module>
         <module>minirpc-client</module>
-        <module>minirpc-server</module>
-        <module>minirpc-common</module>
+        <module>minirpc-provider</module>
+        <module>minirpc-core</module>
     </modules>
 
     <properties>

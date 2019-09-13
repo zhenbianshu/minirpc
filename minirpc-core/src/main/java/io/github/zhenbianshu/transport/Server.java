@@ -1,8 +1,5 @@
-package io.github.zhenbianshu.run;
+package io.github.zhenbianshu.transport;
 
-import io.github.zhenbianshu.demo.HelloService;
-import io.github.zhenbianshu.model.Service;
-import io.github.zhenbianshu.model.ServiceMapping;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
@@ -11,17 +8,13 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.codec.string.StringDecoder;
 import lombok.extern.slf4j.Slf4j;
 
-import java.lang.reflect.Method;
-
 /**
  * @author zbs
  * @date 2019/9/3
  */
 @Slf4j
-public class Provider {
-    public static void main(String[] args) {
-        initService();
-
+public class Server {
+    public boolean init() {
         EventLoopGroup bossGroup = new NioEventLoopGroup(1);
         EventLoopGroup workerGroup = new NioEventLoopGroup(8);
 
@@ -35,10 +28,10 @@ public class Provider {
         try {
             bootstrap.childHandler(new ChannelInitializer<SocketChannel>() {
                 @Override
-                protected void initChannel(SocketChannel socketChannel) throws Exception {
+                protected void initChannel(SocketChannel socketChannel) {
                     ChannelPipeline p = socketChannel.pipeline();
                     p.addLast(new StringDecoder());
-                    p.addLast(new SocketHandler());
+                    p.addLast(new ServerSocketHandler());
                 }
             });
             ChannelFuture channelFuture = bootstrap.bind(8122).sync();
@@ -47,25 +40,9 @@ public class Provider {
             log.error("start server error", e);
             bossGroup.shutdownGracefully();
             workerGroup.shutdownGracefully();
+            return false;
         }
+        return true;
     }
 
-    private static void initService() {
-        HelloService helloService = new HelloService();
-
-        Method method = null;
-        try {
-            method = HelloService.class.getDeclaredMethod("say", String.class);
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        }
-
-        Service service = Service.builder()
-                .classObject(helloService)
-                .id(666)
-                .method(method)
-                .build();
-
-        ServiceMapping.SERVICE_MAP.put(666, service);
-    }
 }
