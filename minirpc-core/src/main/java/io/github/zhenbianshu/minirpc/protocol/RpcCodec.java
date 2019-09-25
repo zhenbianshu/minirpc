@@ -1,4 +1,4 @@
-package io.github.zhenbianshu.protocol;
+package io.github.zhenbianshu.minirpc.protocol;
 
 /**
  * @author zbs

@@ -1,4 +1,4 @@
-package io.github.zhenbianshu.spring;
+package io.github.zhenbianshu.minirpc.spring;
 
 import lombok.Data;
 

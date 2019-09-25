@@ -1,4 +1,4 @@
-package io.github.zhenbianshu.serialize;
+package io.github.zhenbianshu.minirpc.serialize;
 
 /**
  * @author zbs

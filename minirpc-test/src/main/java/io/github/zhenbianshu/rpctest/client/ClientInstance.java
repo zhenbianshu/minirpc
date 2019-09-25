@@ -1,8 +1,8 @@
-package io.github.zhenbianshu.client;
+package io.github.zhenbianshu.rpctest.client;
 
-import io.github.zhenbianshu.api.HelloService;
-import io.github.zhenbianshu.core.Request;
-import io.github.zhenbianshu.transport.Client;
+import io.github.zhenbianshu.rpctest.api.HelloService;
+import io.github.zhenbianshu.minirpc.core.Request;
+import io.github.zhenbianshu.minirpc.transport.Client;
 
 import java.util.concurrent.CompletableFuture;
 

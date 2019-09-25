@@ -1,4 +1,4 @@
-package io.github.zhenbianshu.core;
+package io.github.zhenbianshu.minirpc.core;
 
 import lombok.Builder;
 import lombok.Data;

@@ -1,8 +1,8 @@
-package io.github.zhenbianshu.transport;
+package io.github.zhenbianshu.minirpc.transport;
 
 import com.alibaba.fastjson.JSON;
-import io.github.zhenbianshu.core.Response;
-import io.github.zhenbianshu.core.ResponseFuture;
+import io.github.zhenbianshu.minirpc.core.Response;
+import io.github.zhenbianshu.minirpc.core.ResponseFuture;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 

@@ -1,4 +1,4 @@
-package io.github.zhenbianshu.spring;
+package io.github.zhenbianshu.minirpc.spring;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;

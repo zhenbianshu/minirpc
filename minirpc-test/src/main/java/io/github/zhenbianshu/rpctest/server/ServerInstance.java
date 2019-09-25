@@ -1,7 +1,7 @@
-package io.github.zhenbianshu.server;
+package io.github.zhenbianshu.rpctest.server;
 
-import io.github.zhenbianshu.api.HelloService;
-import io.github.zhenbianshu.core.Provider;
+import io.github.zhenbianshu.rpctest.api.HelloService;
+import io.github.zhenbianshu.minirpc.core.Provider;
 import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.Method;

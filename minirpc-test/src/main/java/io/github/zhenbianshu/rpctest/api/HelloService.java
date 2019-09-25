@@ -1,4 +1,4 @@
-package io.github.zhenbianshu.api;
+package io.github.zhenbianshu.rpctest.api;
 
 /**
  * @author zbs

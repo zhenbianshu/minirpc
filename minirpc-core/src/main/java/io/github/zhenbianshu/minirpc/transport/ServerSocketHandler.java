@@ -1,14 +1,13 @@
-package io.github.zhenbianshu.transport;
+package io.github.zhenbianshu.minirpc.transport;
 
 import com.alibaba.fastjson.JSON;
-import io.github.zhenbianshu.core.Request;
-import io.github.zhenbianshu.core.Response;
-import io.github.zhenbianshu.core.Provider;
+import io.github.zhenbianshu.minirpc.core.Provider;
+import io.github.zhenbianshu.minirpc.core.Request;
+import io.github.zhenbianshu.minirpc.core.Response;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
-import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.Method;
 
@@ -16,7 +15,6 @@ import java.lang.reflect.Method;
  * @author zbs
  * @date 2019/9/3
  */
-@Slf4j
 public class ServerSocketHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) {
