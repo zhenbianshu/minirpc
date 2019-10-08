@@ -9,7 +9,7 @@ import java.util.List;
  * @date 2019/9/29
  */
 @Data
-public class ProviderConfig {
+public class ProviderConfig<T> {
     private String host;
 
     private Integer export;
@@ -17,4 +17,8 @@ public class ProviderConfig {
     private List<MethodConfig> methods;
 
     private RegistryConfig registryConfig;
+
+    private T ref;
+
+    private Class<T> interfaceName;
 }
