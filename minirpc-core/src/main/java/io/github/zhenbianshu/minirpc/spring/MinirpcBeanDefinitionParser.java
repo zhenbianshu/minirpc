@@ -35,6 +35,7 @@ public class MinirpcBeanDefinitionParser implements BeanDefinitionParser {
 
         RootBeanDefinition beanDefinition = new RootBeanDefinition();
         beanDefinition.setBeanClass(beanClass);
+        beanDefinition.setLazyInit(false);
         if (parserContext.getRegistry().containsBeanDefinition(id)) {
             throw new IllegalStateException("Duplicate spring bean id " + id);
         }
@@ -54,7 +55,7 @@ public class MinirpcBeanDefinitionParser implements BeanDefinitionParser {
             }
 
             Object reference;
-            if ("ref".equals(property)) {
+            if ("ref".equals(property) || "registry".equals(property)) {
                 reference = new RuntimeBeanReference(value);
             } else {
                 reference = new TypedStringValue(value);
