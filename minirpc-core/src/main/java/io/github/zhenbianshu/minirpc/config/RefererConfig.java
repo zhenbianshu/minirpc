@@ -2,8 +2,6 @@ package io.github.zhenbianshu.minirpc.config;
 
 import lombok.Data;
 
-import java.util.List;
-
 /**
  * @author zbs
  * @date 2019/9/29
@@ -12,7 +10,7 @@ import java.util.List;
 public class RefererConfig<T> {
     private String id;
 
-    private Class<T> interfaceName;
+    private Class<T> serviceInterface;
 
     private RegistryConfig registry;
 

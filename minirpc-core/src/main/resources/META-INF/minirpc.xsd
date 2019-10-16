@@ -15,28 +15,14 @@
                 <xsd:element ref="beans:property" minOccurs="0" maxOccurs="unbounded"/>
             </xsd:choice>
             <xsd:attribute name="id" type="xsd:ID"/>
-            <xsd:attribute name="export" type="xsd:string" use="optional">
-                <xsd:annotation>
-                    <xsd:documentation><![CDATA[ 服务暴露的方式，包含协议及端口号，多个协议端口用"," 分隔. ]]></xsd:documentation>
-                </xsd:annotation>
-            </xsd:attribute>
-            <xsd:attribute name="interface" type="xsd:token">
-                <xsd:annotation>
-                    <xsd:documentation>
-                        <![CDATA[ Defines the interface to advertise for this service in the service registry. ]]></xsd:documentation>
-                    <xsd:appinfo>
-                        <tool:annotation>
-                            <tool:expected-type type="java.lang.Class"/>
-                        </tool:annotation>
-                    </xsd:appinfo>
-                </xsd:annotation>
-            </xsd:attribute>
-            <xsd:attribute name="ref" type="xsd:string" use="optional">
+            <xsd:attribute name="export" type="xsd:integer" />
+            <xsd:attribute name="ref" type="xsd:string">
                 <xsd:annotation>
                     <xsd:documentation>
                         <![CDATA[ The service implementation instance bean id. ]]></xsd:documentation>
                 </xsd:annotation>
             </xsd:attribute>
+            <xsd:attribute name="registry" type="xsd:string" />
         </xsd:complexType>
     </xsd:element>
     <xsd:element name="referer">
@@ -45,7 +31,8 @@
                 <xsd:element ref="beans:property" minOccurs="0" maxOccurs="unbounded"/>
             </xsd:choice>
             <xsd:attribute name="id" type="xsd:ID"/>
-            <xsd:attribute name="interface" type="xsd:token" use="optional">
+            <xsd:attribute name="registry" type="xsd:string" />
+            <xsd:attribute name="serviceInterface" type="xsd:token">
                 <xsd:annotation>
                     <xsd:documentation><![CDATA[ The service interface class name. ]]></xsd:documentation>
                     <xsd:appinfo>
@@ -55,14 +42,9 @@
                     </xsd:appinfo>
                 </xsd:annotation>
             </xsd:attribute>
-            <xsd:attribute name="serviceInterface" type="xsd:string" use="optional">
+            <xsd:attribute name="directUrl" type="xsd:string">
                 <xsd:annotation>
-                    <xsd:documentation><![CDATA[ The service interface name. ]]></xsd:documentation>
-                </xsd:annotation>
-            </xsd:attribute>
-            <xsd:attribute name="directUrl" type="xsd:string" use="optional">
-                <xsd:annotation>
-                    <xsd:documentation><![CDATA[点对点直连服务提供地址 ]]></xsd:documentation>
+                    <xsd:documentation><![CDATA[ direct url will ignore registry ]]></xsd:documentation>
                 </xsd:annotation>
             </xsd:attribute>
         </xsd:complexType>
@@ -74,21 +56,8 @@
                 <xsd:element ref="beans:property" minOccurs="0" maxOccurs="unbounded"/>
             </xsd:choice>
             <xsd:attribute name="id" type="xsd:ID"/>
-            <xsd:attribute name="serviceInterface" type="xsd:string" use="optional">
-                <xsd:annotation>
-                    <xsd:documentation><![CDATA[ The service interface name. ]]></xsd:documentation>
-                </xsd:annotation>
-            </xsd:attribute>
-            <xsd:attribute name="address" type="xsd:string" use="optional">
-                <xsd:annotation>
-                    <xsd:documentation><![CDATA[注册地址 ]]></xsd:documentation>
-                </xsd:annotation>
-            </xsd:attribute>
-            <xsd:attribute name="port" type="xsd:unsignedInt" use="optional">
-                <xsd:annotation>
-                    <xsd:documentation><![CDATA[注册端口 ]]></xsd:documentation>
-                </xsd:annotation>
-            </xsd:attribute>
+            <xsd:attribute name="address" type="xsd:string"/>
+            <xsd:attribute name="port" type="xsd:unsignedInt"/>
         </xsd:complexType>
     </xsd:element>
 </xsd:schema>
