@@ -10,15 +10,13 @@ import java.util.List;
  */
 @Data
 public class ProviderConfig<T> {
-    private String host;
+    private String id;
 
     private Integer export;
 
     private List<MethodConfig> methods;
 
-    private RegistryConfig registryConfig;
+    private RegistryConfig registry;
 
     private T ref;
-
-    private Class<T> interfaceName;
 }

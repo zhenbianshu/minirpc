@@ -14,11 +14,7 @@ public class RefererConfig<T> {
 
     private Class<T> interfaceName;
 
-    private T ref;
-
-    private RegistryConfig registryConfig;
-
-    private List<MethodConfig> methods;
+    private RegistryConfig registry;
 
     private String directUrl;
 }
