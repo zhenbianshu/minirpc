@@ -64,7 +64,6 @@ public class MinirpcBeanDefinitionParser implements BeanDefinitionParser {
             beanDefinition.getPropertyValues().addPropertyValue(property, reference);
         }
 
-
         return beanDefinition;
     }
 }
