@@ -15,6 +15,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Request {
     private String className;
+    private String methodName;
     private Long requestId;
     private Object[] parameters;
 }

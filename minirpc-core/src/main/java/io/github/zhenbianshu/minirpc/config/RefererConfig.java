@@ -1,13 +1,13 @@
 package io.github.zhenbianshu.minirpc.config;
 
-import io.github.zhenbianshu.minirpc.core.Cluster;
 import io.github.zhenbianshu.minirpc.proxy.RefererInvocationHandler;
+import io.github.zhenbianshu.minirpc.proxy.Remote;
+import io.github.zhenbianshu.minirpc.proxy.ServerNode;
 import lombok.Data;
 import org.springframework.beans.factory.FactoryBean;
+import org.springframework.util.StringUtils;
 
 import java.lang.reflect.Proxy;
-import java.util.Collections;
-import java.util.List;
 
 /**
  * @author zbs
@@ -33,13 +33,16 @@ public class RefererConfig<T> implements FactoryBean<T> {
         return serviceInterface;
     }
 
-    public T getRef() {
-        return (T) Proxy.newProxyInstance(Thread.currentThread().getContextClassLoader(), serviceInterface.getClasses(), new RefererInvocationHandler<T>(serviceInterface, getClusters(serviceInterface)));
+    private T getRef() {
+        return (T) Proxy.newProxyInstance(Thread.currentThread().getContextClassLoader(), serviceInterface.getClasses(), new RefererInvocationHandler<>(serviceInterface, getRemote()));
 
     }
 
-    private List<Cluster> getClusters(Class<T> serviceInterface) {
+    private Remote getRemote() {
+        if (!StringUtils.isEmpty(directUrl)) {
+            return new ServerNode(directUrl);
+        }
         //  get Clusters from registry or directUrl
-        return Collections.emptyList();
+        return null;
     }
 }
