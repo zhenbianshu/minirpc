@@ -34,7 +34,7 @@ public class RefererConfig<T> implements FactoryBean<T> {
     }
 
     private T getRef() {
-        return (T) Proxy.newProxyInstance(Thread.currentThread().getContextClassLoader(), serviceInterface.getClasses(), new RefererInvocationHandler<>(serviceInterface, getRemote()));
+        return (T) Proxy.newProxyInstance(serviceInterface.getClassLoader(), new Class<?>[]{serviceInterface}, new RefererInvocationHandler<>(serviceInterface, getRemote()));
 
     }
 

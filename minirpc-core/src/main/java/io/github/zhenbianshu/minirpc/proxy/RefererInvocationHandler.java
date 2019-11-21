@@ -21,6 +21,12 @@ public class RefererInvocationHandler<T> implements InvocationHandler {
 
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+        if (method.getDeclaringClass().equals(Object.class)) {
+            if ("toString".equals(method.getName())) {
+                return remote.toString();
+            }
+        }
+
         Request request = Request.builder().className(refererClass.getName()).methodName(method.getName()).parameters(args).build();
 
         return remote.call(request);
