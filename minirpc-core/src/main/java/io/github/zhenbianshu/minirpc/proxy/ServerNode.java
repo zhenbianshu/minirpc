@@ -2,10 +2,9 @@ package io.github.zhenbianshu.minirpc.proxy;
 
 import io.github.zhenbianshu.minirpc.core.Request;
 import io.github.zhenbianshu.minirpc.core.Response;
+import io.github.zhenbianshu.minirpc.core.ResponseFuture;
 import io.github.zhenbianshu.minirpc.transport.Client;
 import org.springframework.util.NumberUtils;
-
-import java.util.concurrent.CompletableFuture;
 
 /**
  * @author zbs
@@ -19,17 +18,19 @@ public class ServerNode extends Remote {
         String[] serverDetails = url.split(":");
         Integer port = NumberUtils.parseNumber(serverDetails[1], Integer.class);
         client = new Client(serverDetails[0], port);
-        client.connect();
     }
 
     @Override
     public Response call(Request request) {
-        CompletableFuture<Object> future = client.send(request);
+        ResponseFuture future = new ResponseFuture(request);
+
         Response response;
         try {
+            client.send(serialization.serialize(request));
             response = (Response) future.get();
             System.out.println(future.get());
         } catch (Exception e) {
+            ResponseFuture.remove(request);
             System.out.println("no response");
             response = Response.builder().errorCode(10001).build();
         }

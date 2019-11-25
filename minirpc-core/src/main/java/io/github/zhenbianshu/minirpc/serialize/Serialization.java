@@ -7,5 +7,5 @@ import io.github.zhenbianshu.minirpc.core.Request;
  * @date 2019/9/13
  */
 public interface Serialization {
-    String serialize(Request request);
+    byte[] serialize(Request request);
 }

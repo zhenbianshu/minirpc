@@ -14,4 +14,8 @@ public class ResponseFuture extends CompletableFuture<Object> {
     public ResponseFuture(Request request) {
         REQUEST_TO_FUTURE.put(request.getRequestId(), this);
     }
+
+    public static void remove(Request request) {
+        REQUEST_TO_FUTURE.remove(request.getRequestId());
+    }
 }

@@ -9,7 +9,7 @@ import io.github.zhenbianshu.minirpc.core.Request;
  */
 public class FastJsonSerialize implements Serialization {
     @Override
-    public String serialize(Request request) {
-        return JSON.toJSONString(request);
+    public byte[] serialize(Request request) {
+        return JSON.toJSONString(request).getBytes();
     }
 }

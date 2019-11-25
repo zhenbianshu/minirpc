@@ -12,7 +12,12 @@ public enum ErrorCode {
 
     TRANSPORT(1002),
 
-    SPRING(1003);
+    SPRING(1003),
+
+    PARAM(1004),
+
+
+    ;
 
 
     private int codeNum;

@@ -25,9 +25,10 @@ public class Client {
     public Client(String ip, Integer port) {
         this.ip = ip;
         this.port = port;
+        connect();
     }
 
-    public boolean connect() {
+    private void connect() {
         EventLoopGroup boss = new NioEventLoopGroup();
         Bootstrap bootstrap = new Bootstrap();
 
@@ -47,15 +48,13 @@ public class Client {
         try {
             ChannelFuture channelFuture = bootstrap.connect(ip, port).sync();
             channel = channelFuture.channel();
-            return true;
         } catch (Exception e) {
-            return false;
+            // log
         }
     }
 
-    public CompletableFuture<Object> send(Request request) {
-        channel.writeAndFlush(Unpooled.copiedBuffer(JSON.toJSONBytes(request)));
-        return new ResponseFuture(request);
+    public void send(byte[] data) {
+        channel.writeAndFlush(data);
     }
 
 }
