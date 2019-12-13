@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:minirpc="http://io.github.zhenbianshu/schema/minirpc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://io.github.zhenbianshu/schema/minirpc http://io.github.zhenbianshu/schema/minirpc.xsd">
+
+    <minirpc:referer id="helloService" directUrl="127.0.0.1:8081"
+                     serviceInterface="io.github.zhenbianshu.rpctest.api.HelloService"/>
 
 </beans>

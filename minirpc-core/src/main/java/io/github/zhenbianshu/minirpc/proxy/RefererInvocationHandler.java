@@ -39,6 +39,6 @@ public class RefererInvocationHandler<T> implements InvocationHandler {
                 .parameters(args)
                 .build();
 
-        return remote.call(request);
+        return method.getReturnType().cast(remote.call(request).getResponseVal());
     }
 }

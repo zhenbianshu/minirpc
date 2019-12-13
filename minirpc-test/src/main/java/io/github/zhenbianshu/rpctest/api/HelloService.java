@@ -2,10 +2,8 @@ package io.github.zhenbianshu.rpctest.api;
 
 /**
  * @author zbs
- * @date 2019/9/9
+ * @date 2019/12/12
  */
-public class HelloService {
-    public String say(String someone) {
-        return "hello " + someone;
-    }
+public interface HelloService {
+    String say(String name);
 }

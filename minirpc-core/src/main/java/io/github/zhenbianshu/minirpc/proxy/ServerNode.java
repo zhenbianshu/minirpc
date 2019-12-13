@@ -4,6 +4,7 @@ import io.github.zhenbianshu.minirpc.core.Request;
 import io.github.zhenbianshu.minirpc.core.Response;
 import io.github.zhenbianshu.minirpc.core.ResponseFuture;
 import io.github.zhenbianshu.minirpc.transport.Client;
+import io.github.zhenbianshu.minirpc.transport.NettyClient;
 import org.springframework.util.NumberUtils;
 
 /**
@@ -17,7 +18,7 @@ public class ServerNode extends Remote {
     public ServerNode(String url) {
         String[] serverDetails = url.split(":");
         Integer port = NumberUtils.parseNumber(serverDetails[1], Integer.class);
-        client = new Client(serverDetails[0], port);
+        client = new NettyClient(serverDetails[0], port);
     }
 
     @Override
@@ -26,12 +27,10 @@ public class ServerNode extends Remote {
 
         Response response;
         try {
-            client.send(serialization.serialize(request));
+            client.send(request);
             response = (Response) future.get();
-            System.out.println(future.get());
         } catch (Exception e) {
             ResponseFuture.remove(request);
-            System.out.println("no response");
             response = Response.builder().errorCode(10001).build();
         }
         return response;
