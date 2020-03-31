@@ -17,10 +17,19 @@ import java.lang.reflect.Proxy;
 public class RefererConfig<T> implements FactoryBean<T> {
     private String id;
 
+    /**
+     * 服务接口
+     */
     private Class<T> serviceInterface;
 
+    /**
+     * 注册服务器地址，用以获取服务器地址
+     */
     private RegistryConfig registry;
 
+    /**
+     * 直连时的服务器地址
+     */
     private String directUrl;
 
     @Override

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:minirpc="http://io.github.zhenbianshu/schema/minirpc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+       http://io.github.zhenbianshu/schema/minirpc http://io.github.zhenbianshu/schema/minirpc.xsd">
+    <bean id="helloService" class="io.github.zhenbianshu.rpctest.api.HelloServiceImpl"/>
+
+    <minirpc:registry id="reg" port="8883" address="127.0.0.1"/>
+    <minirpc:provider id="zbsServer" export="8881" ref="helloService" registry="reg"/>
+
+</beans>
