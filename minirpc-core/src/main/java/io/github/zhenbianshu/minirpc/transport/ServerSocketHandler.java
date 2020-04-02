@@ -23,9 +23,9 @@ public class ServerSocketHandler extends ChannelInboundHandlerAdapter {
         System.out.println(msg);
 
         Request request = JSON.parseObject(body, Request.class);
-        Provider service = Provider.PROVIDERS_MAP.get(request.getClassName());
+        Provider<?> service = Provider.PROVIDERS_MAP.get(request.getClassName());
 
-        Method method = service.getMethod();
+        Method method = service.getMethod(request.getMethodName());
         Object object = service.getClassObject();
         Object[] parameters = request.getParameters();
 

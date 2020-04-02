@@ -16,6 +16,16 @@
             </xsd:choice>
             <xsd:attribute name="id" type="xsd:ID"/>
             <xsd:attribute name="export" type="xsd:integer" />
+            <xsd:attribute name="serviceInterface" type="xsd:token">
+                <xsd:annotation>
+                    <xsd:documentation><![CDATA[ The service interface class name. ]]></xsd:documentation>
+                    <xsd:appinfo>
+                        <tool:annotation>
+                            <tool:expected-type type="java.lang.Class"/>
+                        </tool:annotation>
+                    </xsd:appinfo>
+                </xsd:annotation>
+            </xsd:attribute>
             <xsd:attribute name="ref" type="xsd:string">
                 <xsd:annotation>
                     <xsd:documentation>

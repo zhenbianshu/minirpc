@@ -11,8 +11,8 @@ import io.netty.handler.codec.string.StringDecoder;
  * @author zbs
  * @date 2019/9/3
  */
-public class Server {
-    public boolean init() {
+public class NettyServer {
+    public boolean init(int export) {
         EventLoopGroup bossGroup = new NioEventLoopGroup(1);
         EventLoopGroup workerGroup = new NioEventLoopGroup(8);
 
@@ -32,8 +32,8 @@ public class Server {
                     p.addLast(new ServerSocketHandler());
                 }
             });
-            ChannelFuture channelFuture = bootstrap.bind(8122).sync();
-            channelFuture.channel().closeFuture().sync();
+            ChannelFuture channelFuture = bootstrap.bind(export);
+            channelFuture.syncUninterruptibly();
         } catch (Exception e) {
             bossGroup.shutdownGracefully();
             workerGroup.shutdownGracefully();

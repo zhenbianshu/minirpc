@@ -3,6 +3,8 @@ package io.github.zhenbianshu.minirpc.codec;
 import com.alibaba.fastjson.JSON;
 import io.github.zhenbianshu.minirpc.core.Request;
 import io.github.zhenbianshu.minirpc.core.Response;
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.Unpooled;
 
 /**
  * @author zbs
@@ -10,8 +12,9 @@ import io.github.zhenbianshu.minirpc.core.Response;
  */
 public class JsonCodec implements Codec {
     @Override
-    public byte[] encode(Request request) {
-        return JSON.toJSONBytes(request);
+    public ByteBuf encode(Request request) {
+        String json = JSON.toJSONString(request);
+        return Unpooled.copiedBuffer(json.getBytes());
     }
 
     @Override

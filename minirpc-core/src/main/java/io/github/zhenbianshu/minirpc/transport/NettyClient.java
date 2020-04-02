@@ -4,6 +4,7 @@ import io.github.zhenbianshu.minirpc.core.Request;
 import io.github.zhenbianshu.minirpc.core.Response;
 import io.github.zhenbianshu.minirpc.core.ResponseFuture;
 import io.netty.bootstrap.Bootstrap;
+import io.netty.buffer.ByteBuf;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
@@ -54,7 +55,9 @@ public class NettyClient extends Client {
                 });
         try {
             ChannelFuture channelFuture = bootstrap.connect(ip, port).sync();
-            channel = channelFuture.channel();
+            if (channelFuture.isSuccess()) {
+                channel = channelFuture.channel();
+            }
         } catch (Exception e) {
             // log
         }
@@ -63,7 +66,7 @@ public class NettyClient extends Client {
 
     @Override
     public void send(Request request) {
-        byte[] data = codec.encode(request);
+        ByteBuf data = codec.encode(request);
         channel.writeAndFlush(data);
     }
 
