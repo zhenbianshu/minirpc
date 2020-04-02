@@ -9,7 +9,6 @@ import org.springframework.context.support.FileSystemXmlApplicationContext;
 public class ServerInstance {
     public static void main(String[] args) {
         FileSystemXmlApplicationContext context = new FileSystemXmlApplicationContext("classpath:server.xml");
-        Object zbsServer = context.getBean("zbsServer");
-        System.out.println("hello");
+        System.out.println("Server Started");
     }
 }

@@ -5,6 +5,7 @@ import io.github.zhenbianshu.minirpc.core.Request;
 import io.github.zhenbianshu.minirpc.core.Response;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
+import io.netty.util.CharsetUtil;
 
 /**
  * @author zbs
@@ -18,7 +19,8 @@ public class JsonCodec implements Codec {
     }
 
     @Override
-    public Response decode(byte[] data) {
-        return JSON.parseObject(data, Response.class);
+    public Response decode(ByteBuf data) {
+        String msg = data.toString(CharsetUtil.UTF_8);
+        return JSON.parseObject(msg, Response.class);
     }
 }

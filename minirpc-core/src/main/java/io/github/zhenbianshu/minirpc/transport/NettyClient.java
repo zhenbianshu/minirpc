@@ -1,17 +1,12 @@
 package io.github.zhenbianshu.minirpc.transport;
 
 import io.github.zhenbianshu.minirpc.core.Request;
-import io.github.zhenbianshu.minirpc.core.Response;
-import io.github.zhenbianshu.minirpc.core.ResponseFuture;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
-import io.netty.handler.codec.string.StringDecoder;
-
-import java.util.concurrent.CompletableFuture;
 
 /**
  * @author zbs
@@ -41,16 +36,7 @@ public class NettyClient extends Client {
                 .handler(new ChannelInitializer<SocketChannel>() {
                     @Override
                     protected void initChannel(SocketChannel ch) {
-                        ch.pipeline().addLast(new StringDecoder());
-                        ch.pipeline().addLast(new ChannelInboundHandlerAdapter() {
-                            @Override
-                            public void channelRead(ChannelHandlerContext ctx, Object msg) {
-                                Response response = NettyClient.this.codec.decode(((String) msg).getBytes());
-
-                                CompletableFuture<Object> future = ResponseFuture.REQUEST_TO_FUTURE.remove(response.getRequestId());
-                                future.complete(response.getResponseVal());
-                            }
-                        });
+                        ch.pipeline().addLast(new ClientSocketHandler(NettyClient.this.codec));
                     }
                 });
         try {

@@ -11,5 +11,5 @@ import io.netty.buffer.ByteBuf;
 public interface Codec {
     ByteBuf encode(Request request);
 
-    Response decode(byte[] data);
+    Response decode(ByteBuf data);
 }
